@@ -15,7 +15,7 @@
 
 <div class="h-screen flex flex-col justify-between">
 	<div class="z-40">
-			<Nav />
+		<Nav />
 		{#if $white}
 			<div in:fade class="p-5 lg:py-16 z-10">
 				<img class="w-full" src="/images/logo/goos_white.svg" alt="" />
@@ -43,6 +43,13 @@
 			transition:fade
 			class="w-full object-cover h-screen absolute top-0"
 		/>
+	{:else if item == 2}
+		<div transition:fade class="absolute w-full h-screen flex items-center justify-end">
+			<div class="flex">
+				<img src="/images/index/2.1.jpg" alt="" />
+				<img src="/images/index/2.2.jpg" alt="" />
+			</div>
+		</div>
 	{:else if item == 3}
 		<img
 			src="/images/index/3.jpg"
@@ -50,6 +57,10 @@
 			transition:fade
 			class="w-full object-cover h-screen absolute top-0"
 		/>
+	{:else if item == 4}
+		<div transition:fade class="absolute w-full h-screen flex items-center justify-center">
+			<img src="/images/index/4.jpg" alt="" />
+		</div>
 	{:else if item == 5}
 		<img
 			src="/images/index/5.jpg"
@@ -57,6 +68,10 @@
 			transition:fade
 			class="w-full object-cover h-screen absolute top-0"
 		/>
+	{:else if item == 6}
+		<div transition:fade class="absolute w-full h-screen pt-16 pl-3">
+			<img class="w-56" src="/images/index/6.jpg" alt="" />
+		</div>
 	{/if}
 </div>
 
