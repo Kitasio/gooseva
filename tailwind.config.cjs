@@ -21,5 +21,8 @@ module.exports = {
       'border': 'inset 0px 0px 0px 2px #000000',
       'white': 'inset 0px 0px 0px 2px #ffffff',
     },
-  }
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

@@ -1,7 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import { page } from '$app/stores';
-	import { white } from '$lib/functions/utils';
+	import { showFilter } from '$lib/functions/utils';
 	import Burger from '../Burger.svelte';
 	import Bot from './Bot.svelte';
 	import BotActive from './BotActive.svelte';
@@ -11,6 +11,7 @@
 	let toggled = false;
 	let topActive = false;
 	let botActive = false;
+	export let white = false
 
 	const toggleTop = () => {
 		botActive = false;
@@ -23,30 +24,86 @@
 </script>
 
 <!-- MOBILE -->
-<div class={toggled ? 'h-screen flex flex-col absolute w-full z-50 bg-white' : ''}>
-	<div class="lg:hidden flex justify-between divide-x-2 divide-black border-b-2 border-black">
-		{#if toggled}
+{#if $page.path != '/'}
+	<div class={toggled ? 'h-screen flex flex-col absolute w-full z-50 bg-white' : ''}>
+		<div class="lg:hidden flex justify-between divide-x-2 divide-black border-b-2 border-black">
 			<div
 				in:fly={{ x: 20, duration: 200 }}
 				class="flex font-medium py-2 w-full justify-center items-center"
 			>
+				{#if $page.params.name}
+					<a href="/team">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5 fill-current text-black"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M10 19l-7-7m0 0l7-7m-7 7h18"
+							/>
+						</svg>
+					</a>
+				{:else if $page.params.id}
+					<a href="/projects">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5 fill-current text-black"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M10 19l-7-7m0 0l7-7m-7 7h18"
+							/>
+						</svg>
+					</a>
+				{/if}
 				<h1 class="ml-10 font-bt uppercase">gooseva komanda</h1>
 			</div>
-		{:else}
-			<div in:fly={{ x: -20, duration: 200 }} class="flex font-medium py-2 w-full items-center">
-				<h1 class="ml-5">Проекты</h1>
+			<div on:click={() => (toggled = !toggled)} class="px-2">
+				<Burger {white} {toggled} />
 			</div>
-			<div in:fly={{ x: -20, duration: 200 }} class="flex font-medium py-2 w-full items-center">
-				<h1 class="ml-5">Команда</h1>
-			</div>
-		{/if}
-		<div on:click={() => (toggled = !toggled)} class="px-2">
-			<Burger {toggled} />
 		</div>
-	</div>
 
-	<MobileLinks {toggled} />
-</div>
+		<MobileLinks {toggled} />
+	</div>
+{:else}
+	<div class={toggled ? 'h-screen flex flex-col absolute w-full z-50 bg-white' : ''}>
+		<div
+			class:white={white && !toggled}
+			class="lg:hidden flex justify-between divide-x-2 divide-black border-b-2 border-black"
+		>
+			{#if toggled}
+				<div
+					in:fly={{ x: 20, duration: 200 }}
+					class="flex font-medium py-2 w-full justify-center items-center"
+				>
+					<h1 class="ml-10 font-bt uppercase">gooseva komanda</h1>
+				</div>
+			{:else}
+				<div in:fly={{ x: -20, duration: 200 }} class="flex font-medium py-2 w-full items-center">
+					<a href="/projects" class="ml-5">Проекты</a>
+				</div>
+				<div in:fly={{ x: -20, duration: 200 }} class="flex font-medium py-2 w-full items-center">
+					<a target="_self" href="/team" class="ml-5">Команда</a>
+				</div>
+			{/if}
+			<div on:click={() => (toggled = !toggled)} class="px-2">
+				<Burger {white} {toggled} />
+			</div>
+		</div>
+
+		<MobileLinks {toggled} />
+	</div>
+{/if}
 
 <!-- DESKTOP -->
 <div>
@@ -68,24 +125,31 @@
 			<div in:fly={{ delay: 200 }}>
 				<div class="hidden lg:inline">
 					<div
-						class:white={$white}
+						class:white={white}
 						class="hidden w-full lg:flex justify-between border-b border-black"
 					>
-						<a
-							href="/projects"
-							class={$white
-								? 'flex transition duration-200 hover:shadow-white font-medium py-2 w-full items-center border-r border-white'
-								: 'flex transition duration-200 hover:shadow-border font-medium py-2 w-full items-center border-r border-black'}
-						>
-							<h1 class="ml-5">Проекты</h1>
-						</a>
+						{#if $page.path == '/projects'}
+							<div class="flex items-center space-x-5 cursor-pointer hover:shadow-border w-2/3" on:click={() => ($showFilter = !$showFilter)}>
+								<h1 class="ml-5 font-medium whitespace-nowrap">Навигация по проектам</h1>
+								<img class={$showFilter ? "w-4 h-4 mt-1 rotate-90 transition": "w-4 h-4 mt-1 rotate-180 transition"} src="/images/arrow.svg" alt="">
+							</div>
+						{:else}
+							<a
+								href="/projects"
+								class={white
+									? 'flex transition duration-200 hover:shadow-white font-medium py-2 w-full items-center border-r border-white'
+									: 'flex transition duration-200 hover:shadow-border font-medium py-2 w-full items-center border-r border-black'}
+							>
+								<h1 class="ml-5">Проекты</h1>
+							</a>
+						{/if}
 						<div
 							class={$page.path == '/'
-								? 'w-full lg:flex justify-between '
-								: 'w-1/3 lg:flex justify-between divide-x divide-black'}
+								? 'w-full lg:flex justify-between'
+								: 'w-1/3 lg:flex justify-between border-l border-black'}
 							on:click={toggleTop}
 						>
-							<Top />
+							<Top {white} />
 						</div>
 					</div>
 				</div>
@@ -102,10 +166,10 @@
 			<div class="hidden lg:inline w-full bottom-0" in:fly={{ delay: 200 }}>
 				<div
 					class="hidden group w-full lg:flex justify-between border-t border-black"
-					class:white={$white}
+					class:white={white}
 				>
 					<div
-						class={$white
+						class={white
 							? 'flex transition duration-200 hover:shadow-white font-medium py-2 w-full items-center'
 							: 'flex transition duration-200 hover:shadow-border font-medium py-2 w-full items-center'}
 					>
@@ -118,10 +182,10 @@
 					<div
 						class={$page.path == '/'
 							? 'w-full lg:flex justify-between '
-							: 'w-1/3 lg:flex justify-between divide-x'}
+							: 'w-1/3 lg:flex justify-between border-l border-black'}
 						on:click={toggleBot}
 					>
-						<Bot />
+						<Bot {white} />
 					</div>
 				</div>
 			</div>
@@ -133,5 +197,6 @@
 	.white {
 		@apply text-white;
 		@apply border-white;
+		@apply divide-white;
 	}
 </style>
