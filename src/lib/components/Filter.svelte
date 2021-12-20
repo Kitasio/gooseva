@@ -1,25 +1,16 @@
 <script lang="ts">
+	import { lvl1All, lvl2All, lvl3All, lvl1, lvl2, lvl3 } from '$lib/functions/utils';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-
-	let lvl1All = false;
-	let lvl2All = false;
-	let lvl3All = false;
 
 	let lvl1Options = ['Фото', 'Видео'];
 	let lvl2Options = ['Фешн', 'Реклама', 'Эдиториал'];
 	let lvl3Options = ['Женский', 'Мужской', 'Детский', 'Бьюти', 'Продукт', 'Создание костюма'];
-	let lvl1 = [];
-	let lvl2 = [];
-	let lvl3 = [];
 
 	$: {
-		if (lvl1All) lvl1 = [];
-		if (lvl2All) lvl2 = [];
-		if (lvl3All) lvl3 = [];
-		dispatch('lvl1Change', lvl1);
-		dispatch('lvl2Change', lvl2);
-		dispatch('lvl3Change', lvl3);
+		if ($lvl1All) $lvl1 = [];
+		if ($lvl2All) $lvl2 = [];
+		if ($lvl3All) $lvl3 = [];
 	}
 	
 </script>
@@ -37,17 +28,17 @@
 								id={option}
 								class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 								type="checkbox"
-								bind:group={lvl1}
+								bind:group={$lvl1}
 								value={option}
 							/>
 							<div class="flex items-center space-x-3 mt-0.5">
 								<img
-									class={lvl1.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
+									class={$lvl1.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
 									src="/images/arrow.svg"
 									alt=""
 								/>
 								<span
-									class={lvl1.includes(option)
+									class={$lvl1.includes(option)
 										? 'font-extralight -ml-2 underline transition'
 										: 'font-extralight -ml-2 transition'}>{option}</span
 								>
@@ -68,17 +59,17 @@
 								id={option}
 								class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 								type="checkbox"
-								bind:group={lvl2}
+								bind:group={$lvl2}
 								value={option}
 							/>
 							<div class="flex flex-wrap items-center space-x-3 mt-0.5">
 								<img
-									class={lvl2.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
+									class={$lvl2.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
 									src="/images/arrow.svg"
 									alt=""
 								/>
 								<span
-									class={lvl2.includes(option)
+									class={$lvl2.includes(option)
 										? 'font-extralight -ml-2 underline transition'
 										: 'font-extralight -ml-2 transition'}>{option}</span
 								>
@@ -99,17 +90,17 @@
 								id={option}
 								class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 								type="checkbox"
-								bind:group={lvl3}
+								bind:group={$lvl3}
 								value={option}
 							/>
 							<div class="flex space-x-3 mt-0.5">
 								<img
-									class={lvl3.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
+									class={$lvl3.includes(option) ? 'transition opacity-100' : 'transition opacity-0'}
 									src="/images/arrow.svg"
 									alt=""
 								/>
 								<span
-									class={lvl3.includes(option)
+									class={$lvl3.includes(option)
 										? 'font-extralight -ml-2 underline transition'
 										: 'font-extralight -ml-2 transition'}>{option}</span
 								>
@@ -132,7 +123,7 @@
 					<input
 						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 						type="checkbox"
-						bind:group={lvl1}
+						bind:group={$lvl1}
 						value={option}
 					/>
 					<span class="font-extralight -ml-2">{option}</span>
@@ -143,7 +134,7 @@
 			<input
 				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 				type="checkbox"
-				bind:checked={lvl1All}
+				bind:checked={$lvl1All}
 			/>
 			<span class="font-extralight -ml-2">Все</span>
 		</label>
@@ -157,7 +148,7 @@
 					<input
 						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 						type="checkbox"
-						bind:group={lvl2}
+						bind:group={$lvl2}
 						value={option}
 					/>
 					<span class="font-extralight -ml-2">{option}</span>
@@ -168,7 +159,7 @@
 			<input
 				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 				type="checkbox"
-				bind:checked={lvl2All}
+				bind:checked={$lvl2All}
 			/>
 			<span class="font-extralight -ml-2">Все</span>
 		</label>
@@ -182,7 +173,7 @@
 					<input
 						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 						type="checkbox"
-						bind:group={lvl3}
+						bind:group={$lvl3}
 						value={option}
 					/>
 					<span class="font-extralight -ml-2">{option}</span>
@@ -193,7 +184,7 @@
 			<input
 				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
 				type="checkbox"
-				bind:checked={lvl3All}
+				bind:checked={$lvl3All}
 			/>
 			<span class="font-extralight -ml-2">Все</span>
 		</label>

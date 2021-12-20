@@ -11,7 +11,7 @@
 	let toggled = false;
 	let topActive = false;
 	let botActive = false;
-	export let white = false
+	export let white = false;
 
 	const toggleTop = () => {
 		botActive = false;
@@ -124,14 +124,20 @@
 		{:else}
 			<div in:fly={{ delay: 200 }}>
 				<div class="hidden lg:inline">
-					<div
-						class:white={white}
-						class="hidden w-full lg:flex justify-between border-b border-black"
-					>
+					<div class:white class="hidden w-full lg:flex justify-between border-b border-black">
 						{#if $page.path == '/projects'}
-							<div class="flex items-center space-x-5 cursor-pointer hover:shadow-border w-2/3" on:click={() => ($showFilter = !$showFilter)}>
+							<div
+								class="flex items-center space-x-5 cursor-pointer hover:shadow-border w-2/3 xl:w-3/4 border-black border-r"
+								on:click={() => ($showFilter = !$showFilter)}
+							>
 								<h1 class="ml-5 font-medium whitespace-nowrap">Навигация по проектам</h1>
-								<img class={$showFilter ? "w-4 h-4 mt-1 rotate-90 transition": "w-4 h-4 mt-1 rotate-180 transition"} src="/images/arrow.svg" alt="">
+								<img
+									class={$showFilter
+										? 'w-4 h-4 mt-1 rotate-90 transition'
+										: 'w-4 h-4 mt-1 rotate-180 transition'}
+									src="/images/arrow.svg"
+									alt=""
+								/>
 							</div>
 						{:else}
 							<a
@@ -146,7 +152,7 @@
 						<div
 							class={$page.path == '/'
 								? 'w-full lg:flex justify-between'
-								: 'w-1/3 lg:flex justify-between border-l border-black'}
+								: 'w-1/3 xl:w-1/4 lg:flex justify-between border-r border-black'}
 							on:click={toggleTop}
 						>
 							<Top {white} />
@@ -164,25 +170,26 @@
 			</div>
 		{:else}
 			<div class="hidden lg:inline w-full bottom-0" in:fly={{ delay: 200 }}>
-				<div
-					class="hidden group w-full lg:flex justify-between border-t border-black"
-					class:white={white}
-				>
-					<div
-						class={white
-							? 'flex transition duration-200 hover:shadow-white font-medium py-2 w-full items-center'
-							: 'flex transition duration-200 hover:shadow-border font-medium py-2 w-full items-center'}
-					>
-						{#if $page.path == '/'}
+				<div class="hidden group w-full lg:flex justify-between border-t border-black" class:white>
+					{#if $page.path == '/'}
+						<div
+							class={white
+								? 'flex transition duration-200 hover:shadow-white font-medium py-2 w-full items-center'
+								: 'flex transition duration-200 hover:shadow-border font-medium py-2 w-full items-center'}
+						>
 							<a href="/team" class="ml-5 w-full">Команда</a>
-						{:else}
+						</div>
+					{:else}
+						<div
+							class="flex transition duration-200 hover:shadow-border font-medium py-2 w-2/3 xl:w-3/4 items-center border-r border-black"
+						>
 							<a href="/" class="ml-5 font-bt uppercase w-full">gooseva komanda</a>
-						{/if}
-					</div>
+						</div>
+					{/if}
 					<div
 						class={$page.path == '/'
 							? 'w-full lg:flex justify-between '
-							: 'w-1/3 lg:flex justify-between border-l border-black'}
+							: 'w-1/3 xl:w-1/4 lg:flex justify-between'}
 						on:click={toggleBot}
 					>
 						<Bot {white} />
