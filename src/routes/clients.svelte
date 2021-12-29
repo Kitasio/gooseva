@@ -31,7 +31,7 @@
 <svelte:window bind:innerWidth={w} />
 
 <Nav />
-<div class="mt-10 mx-5 text-xs">
+<div class="my-10 mx-5 text-sm">
 	<p class="font-bold">Артисты и селебрити</p>
 	<p class="font-normal mt-5 2xl:whitespace-pre-line">
 		Sati Kazanova, ZVENTA SVENTANA, VOLEN SENTIR, Директор Всего, группа Fruktы, Krassna, Dr.

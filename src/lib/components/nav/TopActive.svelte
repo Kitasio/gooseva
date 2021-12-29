@@ -1,16 +1,28 @@
-<main class="grid grid-cols-top w-full font-medium divide-x divide-black cursor-pointer bg-white">
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+	const closeTop = () => {
+		dispatch('closeTop')
+	}
+</script>
+
+<main class="grid grid-cols-top w-full font-medium divide-x divide-black bg-white">
 	<div
-		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-l border-b border-black"
+		on:click={closeTop}
+		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-l border-b border-black cursor-pointer"
 	>
 		<span>О нас</span>
 	</div>
 	<div
-		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-b border-black"
+		on:click={closeTop}
+		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-b border-black cursor-pointer"
 	>
 		<span>Услуги</span>
 	</div>
 	<div
-		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-b border-black"
+		on:click={closeTop}
+		class="flex items-center pl-5 2xl:pl-7 py-2 transition duration-200 hover:shadow-border border-b border-black cursor-pointer"
 	>
 		<span>Контакты</span>
 	</div>
@@ -76,7 +88,7 @@
 
 		<p class="mt-3">Instagram</p>
 		<p class="font-bold">@guseva_stylist</p>
-		<p class="font-bold">@gooseva_komanda</p>
+		<a href="https://www.instagram.com/gooseva_komanda" class="font-bold">@gooseva_komanda</a>
 		<p class="mt-3">
 			Если вы&nbsp;хотите присоединиться к&nbsp;нашей команде, поделиться новостями или просто
 			познакомиться с&nbsp;нами, напишите на&nbsp;goosevastyle@gmail.com

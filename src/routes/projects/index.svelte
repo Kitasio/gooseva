@@ -11,25 +11,28 @@
 	const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		for (let i = 0; i < items.projects.length; i++) {
-			const pt = Math.floor(Math.random() * 100);
-			const pr = Math.floor(Math.random() * 100);
-			const pb = Math.floor(Math.random() * 100);
-			const pl = Math.floor(Math.random() * 100);
-			gsap.to(`#img${i}`, {
-				duration: 1,
-				ease: "power1.inOut",
-				paddingTop: pt,
-				paddingRight: pr,
-				paddingBottom: pb,
-				paddingLeft: pl,
-				delay: 0.2,
-				scrollTrigger: {
-					trigger: `#img${i}`,
-				}
-			})
-		}
+		$showFilter = true;
+		items.projects = items.projects.sort((a, b) => a.order - b.order)
+
+		// gsap.registerPlugin(ScrollTrigger);
+		// for (let i = 0; i < items.projects.length; i++) {
+		// 	const pt = Math.floor(Math.random() * 100);
+		// 	const pr = Math.floor(Math.random() * 100);
+		// 	const pb = Math.floor(Math.random() * 100);
+		// 	const pl = Math.floor(Math.random() * 100);
+		// 	gsap.to(`#img${i}`, {
+		// 		duration: 1,
+		// 		ease: "power1.inOut",
+		// 		paddingTop: pt,
+		// 		paddingRight: pr,
+		// 		paddingBottom: pb,
+		// 		paddingLeft: pl,
+		// 		delay: 0.2,
+		// 		scrollTrigger: {
+		// 			trigger: `#img${i}`,
+		// 		}
+		// 	})
+		// }
 	})
 </script>
 
@@ -37,19 +40,19 @@
 <div>
 	<div
 		on:click={() => ($showFilter = !$showFilter)}
-		class="flex lg:hidden justify-between items-center px-7 py-7 border-b-2 border-black text-sm flex-auto"
+		class="flex mt-10 fixed w-full bg-white lg:hidden justify-between items-center px-7 py-7 border-b-2 border-t-2 border-black text-sm flex-auto"
 	>
 		<h1>Навигация по проектам</h1>
 		<p class="mt-1">
 			<img
 				class={$showFilter ? 'rotate-180 transition' : 'transition'}
 				src="/images/arrow.svg"
-				alt=""
+				alt="arrow"
 			/>
 		</p>
 	</div>
 	{#if $showFilter}
-		<div transition:fly={{ x: -20, duration: 200 }} class="fixed w-full border-black lg:border-t z-10">
+		<div transition:fly={{ x: -20, duration: 200 }} class="fixed w-full mt-[118px] lg:mt-0 border-black border-t-2 lg:border-t z-10">
 			<Filter
 				on:$lvl1Change={(e) => ($lvl1 = e.detail)}
 				on:$lvl2Change={(e) => ($lvl2 = e.detail)}
@@ -60,15 +63,15 @@
 	{#key $lvl1 || $lvl2 || $lvl3}
 		<div
 			in:fade
-			class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:my-10"
+			class="pt-[118px] lg:pt-0 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:my-10"
 		>
 			{#each items.projects as i, index (index)}
 				{#if (i.tags.some( (e) => $lvl1.includes(capitalize(e)) ) || !$lvl1.length) && (i.tags.some( (e) => $lvl2.includes(capitalize(e)) ) || !$lvl2.length) && (i.tags.some( (e) => $lvl3.includes(capitalize(e)) ) || !$lvl3.length)}
 					<a class="border-b border-r border-black hover:shadow-border transition duration-200" href={`projects/${index}`}>
-						<div id="img{index}" class="img-anim h-96 {i.classes}">
-							<Image src={i.images[Math.floor(Math.random() * i.images.length - 1)] || i.mainImg} classes={`w-full h-full object-cover ${i.classes}`} />
+						<div id="img{index}" class="img-anim h-96 xl:h-[34rem] {i.classes}" style="padding: {i.style}">
+							<Image src={i.mainImg} classes={`w-full h-full object-cover ${i.classes}`} />
 						</div>
-						<div class="text-center">{i.title}</div>
+						<div class="text-center lg:hidden">{i.title}</div>
 					</a>
 				{/if}
 			{/each}

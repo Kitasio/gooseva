@@ -13,12 +13,12 @@
 <svelte:window bind:innerWidth={w} />
 
 <Nav />
-<div class="mt-10 mx-5 text-xs">
+<div class="my-10 mx-5 text-sm">
 	<p class="font-bold">Коммерческие услуги</p>
 	<p class="mt-3">Креатив:</p>
 	<p class="font-normal whitespace-pre-line">
-		полная разработка концепции съемки (от&nbsp;50&nbsp;000) разработка стиля и&nbsp;образов
-		(от&nbsp;30&nbsp;000)
+		полная разработка концепции съемки (от&nbsp;50&nbsp;000) 
+		разработка стиля и&nbsp;образов (от&nbsp;30&nbsp;000)
 	</p>
 	<p class="mt-3">Стиль:</p>
 	<p class="font-normal whitespace-pre-line">
@@ -32,7 +32,7 @@
 	</p>
 	<p class="mt-3">Создание костюмов:</p>
 	<p class="font-normal whitespace-pre-line">
-		разработка одного костюма (от&nbsp;30000) изготовление рассчитывается индивидуально под задачу
+		разработка одного костюма (от&nbsp;30&nbsp;000) изготовление рассчитывается индивидуально под задачу
 	</p>
 	<p class="font-normal whitespace-pre-line mt-3">
 		Смена специалиста&nbsp;&mdash; 12&nbsp;часов. Рабочие часы сверх смены считаются как переработки

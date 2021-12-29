@@ -1,7 +1,10 @@
 import { writable } from "svelte/store";
 
 export const white = writable(false)
-export const showFilter = writable(false)
+export const showFilter = writable(true)
+
+export const topActive = writable(false)
+export const botActive = writable(false)
 
 export const lvl1All = writable(false);
 export const lvl2All = writable(false);
@@ -47,6 +50,44 @@ export const listForTicker: ArrayLike<string> = [
     'fashion stylists |',
     'costumes designers |',
     'fashion stylists |',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
+    'costumes designers |',
+    'fashion stylists',
     'costumes designers |',
     'fashion stylists',
 ]

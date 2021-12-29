@@ -1,26 +1,45 @@
 <script>
 	import Nav from '$lib/components/nav/Nav.svelte';
 	import { fade } from 'svelte/transition';
-	import { Image, Ticker } from 'svelte-aid';
-	import { listForTicker } from '$lib/functions/utils';
+	import { Image } from 'svelte-aid';
+	import Ticker from '$lib/components/Ticker.svelte'
+	import { listForTicker, topActive, botActive } from '$lib/functions/utils';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
+
 	let white = true
-	onMount(() => {
-		const tl = gsap.timeline({repeat: 5})
-		tl.to(".img2", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
-		tl.to(".img1", {duration: 2,  opacity: 0}, "-=2")
-		tl.to(".img3", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
-		tl.to(".img2", {duration: 2,  opacity: 0}, "-=2")
-		tl.to(".img4", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
-		tl.to(".img3", {duration: 2,  opacity: 0}, "-=2")
-		tl.to(".img5", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
-		tl.to(".img4", {duration: 2,  opacity: 0}, "-=2")
-		tl.to(".img6", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
-		tl.to(".img5", {duration: 2,  opacity: 0}, "-=2")
-		tl.to(".img1", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
-		tl.to(".img6", {duration: 2,  opacity: 0}, "-=2")
-	});
+	let item = 1;
+	let time;
+	let hover = (isWhite, num) => {
+		clearTimeout(time);
+		time = setTimeout(() => {
+			white = isWhite;
+			item = num;
+		}, 400);
+	};
+
+	// onMount(() => {
+	// 	const tl = gsap.timeline({repeat: 5})
+	// 	tl.to(".img2", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
+	// 	tl.to(".img1", {duration: 2,  opacity: 0}, "-=2")
+	// 	tl.to(".img3", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
+	// 	tl.to(".img2", {duration: 2,  opacity: 0}, "-=2")
+	// 	tl.to(".img4", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
+	// 	tl.to(".img3", {duration: 2,  opacity: 0}, "-=2")
+	// 	tl.to(".img5", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
+	// 	tl.to(".img4", {duration: 2,  opacity: 0}, "-=2")
+	// 	tl.to(".img6", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = false})
+	// 	tl.to(".img5", {duration: 2,  opacity: 0}, "-=2")
+	// 	tl.to(".img1", {duration: 2,  opacity: 1, delay: 4, onStart: () => white = true})
+	// 	tl.to(".img6", {duration: 2,  opacity: 0}, "-=2")
+	// });
+
+	const toggleOff = () => {
+		if ($topActive || $botActive) {
+			$botActive = false;
+			$topActive = false;
+		}
+	}
 </script>
 
 <div class="h-screen flex flex-col justify-between">
@@ -29,33 +48,34 @@
 		classWrapper={'fixed flex h-screen items-center z-10 lg:bottom-12 lg:h-auto'}
 		classParent={'space-x-1.5 font-bt'}
 		classChild={white ? 'inline-block text-white' : 'inline-block'}
-		durationMobile={'80s'}
-		duration={'80s'}
+		durationMobile={'160s'}
+		duration={'140s'}
 	/>
 	<div class="z-40">
 		<Nav {white} />
 		{#if white}
 			<div in:fade class="p-5 lg:py-16 z-10">
-				<img class="w-full" src="/images/logo/goos_white.svg" alt="" />
+				<img on:click={toggleOff} class="w-full" src="/images/logo/goos_white.svg" alt="" />
 			</div>
 		{:else}
 			<div in:fade class="p-5 lg:py-16 z-10">
-				<img class="w-full" src="/images/logo/goos.svg" alt="" />
+				<img on:click={toggleOff} class="w-full" src="/images/logo/goos.svg" alt="" />
 			</div>
 		{/if}
 	</div>
 	{#if white}
 		<div in:fade class="p-5 lg:py-16 mb-2 z-10">
-			<img class="w-full" src="/images/logo/kom_white.svg" alt="" />
+			<img on:click={toggleOff} class="w-full" src="/images/logo/kom_white.svg" alt="" />
 		</div>
 	{:else}
-		<div in:fade class="p-5 lg:py-16 mb-2 z-10">
+		<div on:click={toggleOff} in:fade class="p-5 lg:py-16 mb-2 z-10">
 			<img class="w-full" src="/images/logo/kom.svg" alt="" />
 		</div>
 	{/if}
 
-	<div class="grid grid-cols-3 absolute w-full h-full">
-		<div class="img1 w-full object-cover h-screen absolute top-0 opacity-1">
+	<div on:click={toggleOff} class="grid grid-cols-3 absolute w-full h-full">
+		{#if item == 1}
+		<div transition:fade={{ duration: 100 }} class="img1 w-full object-cover h-screen absolute top-0 opacity-1">
 			<Image
 				srcMobile={'/images/index/1Mobile.jpg'}
 				src={'/images/index/1.jpg'}
@@ -63,35 +83,36 @@
 				classes={'w-full object-cover h-screen absolute top-0'}
 			/>
 		</div>
+		{:else if item == 2}
 		<div
-			class="img2 absolute w-full h-screen flex items-center justify-end overflow-hidden opacity-0"
+			transition:fade={{ duration: 100 }} class="img2 absolute w-full h-screen flex items-center justify-end overflow-hidden opacity-1"
 		>
 			<div class="flex flex-col md:flex-row overflow-hidden">
 				<Image
 					src={'/images/index/2.1.jpg'}
-					classes={'w-80 ml-28 mt-20 md:m-0 md:w-auto object-cover'}
+					classes={'ml-28 mt-20 md:m-0 object-cover'}
 				/>
-				<Image src={'/images/index/2.2.jpg'} />
+				<Image classes="object-cover" src={'/images/index/2.2.jpg'} />
 			</div>
 		</div>
-		<img
-			src="/images/index/3.jpg"
-			alt=""
-			class="img3 w-full object-cover h-screen absolute top-0 opacity-0"
-		/>
-		<div class="img4 absolute w-full h-screen flex items-center justify-center opacity-0">
+		{:else if item == 3}
+		<div transition:fade={{ duration: 100 }} class="img4 absolute w-full h-screen flex items-center justify-center opacity-1">
 			<img src="/images/index/4.jpg" alt="" />
 		</div>
-		<div class="img5 w-full object-cover h-screen absolute top-0 opacity-0">
-			<Image
-				srcMobile={'/images/index/5Moblie.jpg'}
-				src={'/images/index/5.jpg'}
-				alt={'main image'}
-				classes={'w-full object-cover h-screen absolute top-0'}
-			/>
-		</div>
-		<div class="img6 absolute w-full h-screen pt-16 pl-3 opacity-0">
-			<img class="w-56 mt-48 -ml-4 md:-ml-0 md:mt-0" src="/images/index/6.jpg" alt="" />
-		</div>
+		{:else if item == 4}
+		<img
+			transition:fade={{ duration: 100 }} 
+			src="/images/index/3.jpg"
+			alt=""
+			class="img3 w-full object-cover h-screen absolute top-0 opacity-1"
+		/>
+		{/if}
 	</div>
+</div>
+
+<div on:click={toggleOff} class="grid grid-cols-2 absolute w-full h-5/6 z-50 top-10">
+	<div on:mouseenter={() => hover(true, 1)} />
+	<div on:mouseenter={() => hover(false, 2)} />
+	<div on:mouseenter={() => hover(false, 3)} />
+	<div on:mouseenter={() => hover(true, 4)} />
 </div>

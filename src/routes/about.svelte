@@ -13,7 +13,7 @@
 <svelte:window bind:innerWidth={w} />
 
 <Nav />
-<div class="mt-10 mx-5 text-xs">
+<div class="mt-10 mx-5 text-sm">
 	<p class="font-bold">GOOSEVA KOMANDA &mdash;</p>
 	<p class="font-normal 2xl:whitespace-pre-line">
 		профессиональная команда стилистов, художников по&nbsp;костюму и&nbsp;ассистентов под

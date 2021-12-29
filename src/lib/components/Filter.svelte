@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { lvl1All, lvl2All, lvl3All, lvl1, lvl2, lvl3 } from '$lib/functions/utils';
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
 
 	let lvl1Options = ['Фото', 'Видео'];
 	let lvl2Options = ['Фешн', 'Реклама', 'Эдиториал'];
@@ -19,7 +17,7 @@
 <div class="hidden bg-white border-b border-black py-7 px-5 w-full lg:flex">
 	<div class="flex space-x-20">
 		<div class="flex">
-			<h1 class="text-lg">Проект</h1>
+			<h1 class="font-medium">Проект</h1>
 			<div>
 				<div class="space-y-3 justify-center">
 					{#each lvl1Options as option}
@@ -50,7 +48,7 @@
 		</div>
 
 		<div class="flex">
-			<h1 class="text-lg">Направление</h1>
+			<h1 class="font-medium">Направление</h1>
 			<div>
 				<div class="space-y-3 justify-center">
 					{#each lvl2Options as option}
@@ -81,7 +79,7 @@
 		</div>
 
 		<div class="flex">
-			<h1 class="text-lg">Стайлинг</h1>
+			<h1 class="font-medium">Стайлинг</h1>
 			<div>
 				<div class="grid grid-cols-2 justify-center">
 					{#each lvl3Options as option}
@@ -116,77 +114,77 @@
 <!-- MOBILE -->
 <div class="bg-white lg:hidden">
 	<div class="p-7 grid grid-cols-4 border-b-2 border-black">
-		<h1 class="col-span-2 text-xl">Проект</h1>
+		<h1 class="col-span-2">Проект</h1>
 		<div class="col-span-1 flex flex-col space-y-2">
 			{#each lvl1Options as option}
 				<label class="whitespace-nowrap space-x-1">
 					<input
-						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+						class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 						type="checkbox"
 						bind:group={$lvl1}
 						value={option}
 					/>
-					<span class="font-extralight -ml-2">{option}</span>
+					<span class=" -ml-2">{option}</span>
 				</label>
 			{/each}
 		</div>
 		<label class="col-span-1 justify-self-end space-x-1">
 			<input
-				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+				class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 				type="checkbox"
 				bind:checked={$lvl1All}
 			/>
-			<span class="font-extralight -ml-2">Все</span>
+			<span class=" -ml-2">Все</span>
 		</label>
 	</div>
 
 	<div class="p-7 grid grid-cols-4 border-b-2 border-black">
-		<h1 class="col-span-2 text-xl">Направление</h1>
+		<h1 class="col-span-2">Направление</h1>
 		<div class="col-span-1 flex flex-col space-y-2">
 			{#each lvl2Options as option}
 				<label class="whitespace-nowrap space-x-1">
 					<input
-						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+						class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 						type="checkbox"
 						bind:group={$lvl2}
 						value={option}
 					/>
-					<span class="font-extralight -ml-2">{option}</span>
+					<span class=" -ml-2">{option}</span>
 				</label>
 			{/each}
 		</div>
 		<label class="col-span-1 justify-self-end space-x-1">
 			<input
-				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+				class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 				type="checkbox"
 				bind:checked={$lvl2All}
 			/>
-			<span class="font-extralight -ml-2">Все</span>
+			<span class=" -ml-2">Все</span>
 		</label>
 	</div>
 
 	<div class="p-7 grid grid-cols-4 border-b-2 border-black">
-		<h1 class="col-span-2 text-xl">Стайлинг</h1>
+		<h1 class="col-span-2">Стайлинг</h1>
 		<div class="col-span-1 flex flex-col space-y-2">
 			{#each lvl3Options as option}
 				<label class="whitespace-nowrap space-x-1">
 					<input
-						class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+						class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 						type="checkbox"
 						bind:group={$lvl3}
 						value={option}
 					/>
-					<span class="font-extralight -ml-2">{option}</span>
+					<span class=" -ml-2">{option}</span>
 				</label>
 			{/each}
 		</div>
 		<label class="col-span-1 justify-self-end space-x-1">
 			<input
-				class="text-black border-2 border-black w-5 h-5 focus:ring-0"
+				class="text-black border-2 border-black w-4 h-4 focus:ring-0 mb-1"
 				type="checkbox"
 				bind:checked={$lvl3All}
 			/>
-			<span class="font-extralight -ml-2">Все</span>
+			<span class=" -ml-2">Все</span>
 		</label>
 	</div>
 </div>

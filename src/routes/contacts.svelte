@@ -13,7 +13,7 @@
 <svelte:window bind:innerWidth={w} />
 
 <Nav />
-<div class="mt-10 mx-5 text-xs">
+<div class="mt-10 mx-5 text-sm">
 	<p class="font-bold">Анна Гусева</p>
 	<p>+79099505999</p>
 	<p>gooseva.style@gmail.com</p>
