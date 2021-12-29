@@ -4,8 +4,6 @@
 	import { Image } from 'svelte-aid';
 	import Ticker from '$lib/components/Ticker.svelte'
 	import { listForTicker, topActive, botActive } from '$lib/functions/utils';
-	import { gsap } from 'gsap';
-	import { onMount } from 'svelte';
 
 	let white = true
 	let item = 1;

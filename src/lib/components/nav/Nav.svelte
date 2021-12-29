@@ -4,8 +4,8 @@
 	import { showFilter, topActive, botActive } from '$lib/functions/utils';
 	import Burger from '../Burger.svelte';
 	import Bot from './Bot.svelte';
-	import BotActive from './botActive.svelte';
-	import TopActive from './topActive.svelte';
+	import BotActive from './BotActive.svelte';
+	import TopActive from './TopActive.svelte';
 	import Top from './Top.svelte';
 	import { onMount } from 'svelte';
 	import MobileLinks from '../MobileLinks.svelte';
